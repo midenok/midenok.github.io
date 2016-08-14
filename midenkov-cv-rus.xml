@@ -9,6 +9,12 @@
       <year>2016</year>
       <holder>Aleksey Midenkov</holder>
     </copyright>
+    <revhistory>
+      <revision>
+        <date>2016-08-14</date>
+        <revremark>Добавлен <link linkend="math_calc">Math calculator</link></revremark>
+      </revision>
+    </revhistory>
   </bookinfo>
   <chapter id="ch1">
     <title>Миденков Алексей Сергеевич</title>
@@ -43,7 +49,7 @@
                 <listitem><para>
                     <ulink url="http://midenok.github.io">HTML</ulink></para></listitem>
                 <listitem><para>
-                    <ulink url="http://midenok.github.io/midenkov-cv.pdf">PDF</ulink></para></listitem>
+                    <ulink url="http://midenok.github.io/midenkov-cv-rus.pdf">PDF</ulink></para></listitem>
               </itemizedlist>
             </td>
             <td>
@@ -67,7 +73,9 @@
           человек и состоял из нескольких отделов: Server, Datacapture, UI, DB, QA, SA, HR. Компания
           специализируется на целевой рекламе. Её основное отличие от конкурентов в том, что она
           способна собирать целевой профиль и осуществлять поставку рекламы на стороне провайдера,
-          что улучшает качество профиля и соотношение клик : покупка.</para>
+          что улучшало качество профиля и соотношение клик : покупка в сравнении с веб-сайтами.
+          Разработкой этой технологии работы с трафиком на стороне провайдера занимался отдел
+          Datacapture.</para>
         <beginpage/>
       </sect2>
     </sect1>
@@ -157,6 +165,63 @@
           >описание server-demo</ulink>.</para>
       <beginpage/>
     </sect1>
+    <sect1 id="math_calc">
+      <title>Math calculator</title>
+      <synopsis>Год: 2016
+Инструментарий: С++11</synopsis>
+      <simpara><emphasis>Исходный код:</emphasis></simpara>
+      <itemizedlist>
+        <listitem>
+          <simpara><emphasis><ulink url="https://github.com/midenok/calculator"
+              >Репозиторий</ulink></emphasis></simpara>
+        </listitem>
+        <listitem>
+          <simpara><emphasis><ulink url="https://github.com/midenok/calculator/releases"
+                >Aрхивы</ulink></emphasis></simpara>
+        </listitem>
+      </itemizedlist>
+      <para>Калькулятор вычисляет математические выражения с учётом приоритета операций и скобок. В
+        выражениях могут присутствовать унарные математические функции (см. <ulink
+          url="http://www.cplusplus.com/reference/cmath/">math.h</ulink>). Вычисление производится
+        двумя стадиями: построение бинарного синтаксического дерева (<code>Calc::parse()</code>) и
+        исполнение синтаксического дерева (<code>Calc::calculate()</code>). Программа не использует
+        рекурсивные вызовы.</para>
+      <para>Правила синтаксического дерева:<orderedlist>
+          <listitem>
+            <para>в корне всегда число, исполнение начинается с корня;</para>
+          </listitem>
+          <listitem>
+            <para>каждый левый потомок: операция (оператор или функция);</para>
+          </listitem>
+          <listitem>
+            <para>каждый правый потомок: число;</para>
+          </listitem>
+          <listitem>
+            <para>оператор исполняется над двумя операндами: предок и правый потомок;</para>
+          </listitem>
+          <listitem>
+            <para>функция исполняется над одним операндом: предок;</para>
+          </listitem>
+          <listitem>
+            <para>если у второго операнда (правый потомок) есть левый потомок (операция), то новая
+              операция имеет приоритет над текущей.</para>
+          </listitem>
+        </orderedlist></para>
+      <para>Таким образом, вычисление начинается с корня и продолжается по левой ветви до первого
+        ветвления (левый потомок у операнда). Затем, состояние сохраняется в стек и вычисление
+        начинается в новой ветви (от операнда). Когда ветвь заканчивается, состояние
+        восстанавливается из стека и продолжается вычисление старой ветви. Обход продолжается до тех
+        пор, пока не закончится ветвь при пустом стеке.</para>
+      <figure>
+        <title>Примеры синтаксических деревьев Math calculator</title>
+        <ulink url="images/calc_syn_tree.png"><inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/calc_syn_tree.png" scalefit="1" contentwidth="164mm"/>
+            </imageobject>
+          </inlinemediaobject></ulink>
+      </figure>
+      <beginpage/>
+    </sect1>
     <sect1>
       <title>C++ MySQL wrapper</title>
         <synopsis>Год: 2013
@@ -219,9 +284,6 @@ Copyright: ©<ulink url="https://en.wikipedia.org/wiki/Phorm">Phorm Corp</ulink>
         структурной диаграммы. Диаграмма позволила быстро понять соотношение и поведение объектов в
         контексте конкретной задачи. Ни одна из существующих поведенческих видов диаграмм UML для
         этого не подошла.</para>
-      <synopsis>
-        
-      </synopsis>
       <figure>
         <title>Схема среза по обработке Bid-запросов в AdServer</title>
         <ulink url="images/bidding_diagram.png"><inlinemediaobject>
@@ -342,6 +404,7 @@ Copyright: ©<ulink url="https://en.wikipedia.org/wiki/Phorm">Phorm Corp</ulink>
         </example></para>
       <para>Скрипт имеет процедуру бинарного поиска для быстрого поиска записи лога по timestamp:
           <code>binary_find</code>.</para>
+      <beginpage/>
     </sect1>
     <sect1>
       <title>Browser list parser</title>
